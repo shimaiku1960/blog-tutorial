@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 const Home = async () => {
   const blogs = await prisma.user.findMany({
     orderBy: { date: "desc" },
