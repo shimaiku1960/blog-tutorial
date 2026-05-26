@@ -1,11 +1,11 @@
-
 "use client";
 
 import { signup } from "@/app/auth/actions";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-const SignupPage = () => {
+function SignupForm() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const message = searchParams.get("message");
@@ -63,11 +63,17 @@ const SignupPage = () => {
       <p className="mt-4 text-sm text-gray-600">
         すでにアカウントをお持ちの方は{" "}
         <Link href="/login" className="text-blue-500 underline">
-          ログイン                                                                                                                                         
+          ログイン
         </Link>
-      </p>                                                                                                                                                 
-    </main>                                                                                                                                              
-  );                                        
-};                                      
+      </p>
+    </main>
+  );
+}
 
-export default SignupPage;    
+export default function SignupPage() {
+  return (
+    <Suspense>
+      <SignupForm />
+    </Suspense>
+  );
+}
