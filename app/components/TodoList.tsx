@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 type Todo = {
   id: number;
@@ -8,8 +8,8 @@ type Todo = {
   completed: boolean;
 };
 
-const TodoList = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+const TodoList = ({ initialTodos }: { initialTodos: Todo[] }) => {
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
   const [title, setTitle] = useState("");
 
   const fetchTodos = async () => {
@@ -18,10 +18,7 @@ const TodoList = () => {
     setTodos(data);
   };
 
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
+  
   const addTodo = async () => {
     if (!title.trim()) return;
 
